@@ -2,31 +2,16 @@
 @import "../scss/bemix";
 
 @include b('block') {
-    position: relative;
-    background: blue;
-    text-align: center;
-    width: 100px;
-    height: 100px;
-    color: white;
-    margin-bottom: 1rem;
+    font-size: 16px;
 
     @include e('element') {
-        @include m('dave') {
-            color:green;
-
-            @include e('inside-element') {
-                color: black;
-                @include m('small') {
-                    font-size: small;
-                }
-            }
-        }
+        color: blue;
     }
 
-    @include e('element') {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%,-50%);
+    @include m('dark') {
+        background-color: black;
+        @include e('element') {
+            color: #fff;
+        }
     }
 }
