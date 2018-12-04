@@ -3,7 +3,7 @@
 
 ### Installation
 via NPM:
-`npm install spriggsey/bemix`
+`npm i bemix`
 
 In your SCSS:
 ```scss
