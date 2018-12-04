@@ -1,0 +1,17 @@
+
+@import "../scss/bemix";
+
+@include b('block') {
+    font-size: 16px;
+
+    @include e('element') {
+        color: blue;
+    }
+
+    @include m('dark') {
+        background-color: black;
+        @include e('element') {
+            color: #fff;
+        }
+    }
+}

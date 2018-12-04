@@ -1,0 +1,64 @@
+// BEM-Mix
+// https://github.com/spriggsey/BEM-Mix
+// Jack Spriggs 2018
+// GNU GENERAL PUBLIC LICENSE
+// VARIABLES
+@import "variables";
+// FUNCTIONS
+@import "functions";
+
+// Block ()
+@mixin b($block) {
+    .#{$block} {
+        @content;
+    }
+}
+
+// Element ( .__link )
+@mixin e($element) {
+    $selector: &;
+    @if containsModifier($selector) and ($separatePrefixes == false) {
+        $block: getBlock($selector);
+        @at-root {
+            #{$selector} {
+                #{$block+$elementSeparator+$element} {
+                    @content;
+                }
+            }
+        }
+    } @else {
+        @at-root {
+            #{$selector} .#{$elementSeparator}#{$element} {
+                @content;
+            }
+        }
+    }
+}
+
+// Modifier ( .--dark )
+@mixin m($modifier) {
+    $selector: &;
+    @if ($separatePrefixes) {
+        @at-root {
+            #{$selector}.#{$modifierSeparator}#{$modifier} {
+                @content;
+            }
+        }
+    } @else {
+        @at-root {
+            #{$selector}#{$modifierSeparator}#{$modifier} {
+                @content;
+            }
+        }
+    }
+
+}
+
+// State ( @include s('active') = .block.is-active )
+@mixin s($state, $prefix: $statePrefix) {
+    @at-root {
+        &.#{$prefix}-#{$state} {
+            @content;
+        }
+    }
+}
