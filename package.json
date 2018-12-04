@@ -1,7 +1,7 @@
 {
     "name": "bem-mix",
     "description": "BEM Style mixins for SCSS",
-    "version": "v1.0.0-alpha.1",
+    "version": "v1.0.0-alpha.3",
     "author": {
         "name": "Jack Spriggs",
         "email": "jack@askewbrook.com"
