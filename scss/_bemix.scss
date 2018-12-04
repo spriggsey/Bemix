@@ -38,7 +38,7 @@
 // Modifier ( .--dark )
 @mixin m($modifier) {
     $selector: &;
-    @if($separatePrefixes) {
+    @if ($separatePrefixes) {
         @at-root {
             #{$selector}.#{$modifierSeparator}#{$modifier} {
                 @content;
