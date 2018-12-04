@@ -6,6 +6,7 @@
         "name": "Jack Spriggs",
         "email": "jack@askewbrook.com"
     },
+    "license": "GPL-3.0",
     "main": "scss/_bemix.scss",
     "repository": {
         "type": "git",
