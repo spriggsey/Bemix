@@ -1,0 +1,53 @@
+// BEM-Mix
+// https://github.com/spriggsey/BEM-Mix
+// Jack Spriggs 2018
+// GNU GENERAL PUBLIC LICENSE
+// VARIABLES
+@import "variables";
+// FUNCTIONS
+@import "functions";
+
+
+@mixin b($block) {
+    .#{$block} {
+        @content;
+    }
+}
+
+@mixin e($element) {
+    $selector: &;
+    @if containsModifier($selector) and ($separatePrefixes == false) {
+        $block: getBlock($selector);
+        @at-root {
+            #{$selector} {
+                #{$block+$elementSeparator+$element} {
+                    @content;
+                }
+            }
+        }
+    } @else {
+        @at-root {
+            #{$selector} .#{$elementSeparator}#{$element} {
+                @content;
+            }
+        }
+    }
+}
+
+@mixin m($modifier) {
+    $selector: &;
+    // we want to use modifiers without having to add the base class on again
+    @at-root {
+        #{$selector}.#{$modifierSeparator}#{$modifier} {
+            @content;
+        }
+    }
+}
+
+@mixin s($state, $prefix: $statePrefix) {
+    @at-root {
+        &#{$modifierSeparator}#{$prefix}-#{$state} {
+            @content;
+        }
+    }
+}
