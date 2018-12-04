@@ -7,13 +7,14 @@
 // FUNCTIONS
 @import "functions";
 
-
+// Block ()
 @mixin b($block) {
     .#{$block} {
         @content;
     }
 }
 
+// Element ( .__link )
 @mixin e($element) {
     $selector: &;
     @if containsModifier($selector) and ($separatePrefixes == false) {
@@ -34,19 +35,29 @@
     }
 }
 
+// Modifier ( .--dark )
 @mixin m($modifier) {
     $selector: &;
-    // we want to use modifiers without having to add the base class on again
-    @at-root {
-        #{$selector}.#{$modifierSeparator}#{$modifier} {
-            @content;
+    @if($separatePrefixes) {
+        @at-root {
+            #{$selector}.#{$modifierSeparator}#{$modifier} {
+                @content;
+            }
+        }
+    } @else {
+        @at-root {
+            #{$selector}#{$modifierSeparator}#{$modifier} {
+                @content;
+            }
         }
     }
+
 }
 
+// State ( @include s('active') = .block.is-active )
 @mixin s($state, $prefix: $statePrefix) {
     @at-root {
-        &#{$modifierSeparator}#{$prefix}-#{$state} {
+        &.#{$prefix}-#{$state} {
             @content;
         }
     }
