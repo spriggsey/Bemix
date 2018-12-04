@@ -1,7 +1,7 @@
 # Bemix
 ## BEM style mixins for Sass
 
-###Installation
+### Installation
 via NPM:
 `npm install spriggsey/bemix`
 
@@ -10,7 +10,7 @@ In your SCSS:
 @import "~bemix";
 ```
 
-###Usage
+### Usage
 
 ```scss
 @include b('block') {
