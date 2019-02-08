@@ -9,7 +9,7 @@
 
 // Block ()
 @mixin b($block) {
-    .#{$block} {
+    .#{$blockSeparator+$block} {
         @content;
     }
 }
