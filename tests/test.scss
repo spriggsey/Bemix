@@ -1,4 +1,3 @@
-
 @import "../scss/bemix";
 
 @include b('block') {
@@ -13,5 +12,9 @@
         @include e('element') {
             color: #fff;
         }
+    }
+
+    @include s('clicked') {
+        color: green;
     }
 }

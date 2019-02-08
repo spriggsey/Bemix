@@ -1,7 +1,7 @@
 {
     "name": "bemix",
     "description": "BEM Style mixins for SCSS",
-    "version": "v1.0.0",
+    "version": "v1.1.0",
     "author": {
         "name": "Jack Spriggs",
         "email": "jack@askewbrook.com"
@@ -28,8 +28,9 @@
     },
     "devDependencies": {
         "cross-env": "^5.1.6",
-        "laravel-mix": "^2.1.11",
-        "node-sass": "^4.11.0",
-        "webpack-dev-server": ">=3.1.11"
+        "laravel-mix": "^4.0.14",
+        "resolve-url-loader": "^2.3.1",
+        "sass": "^1.17.0",
+        "sass-loader": "^7.1.0"
     }
 }
