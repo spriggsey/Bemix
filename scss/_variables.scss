@@ -2,4 +2,6 @@ $blockSeparator: "" !default;
 $elementSeparator: "__" !default;
 $modifierSeparator: "--" !default;
 $statePrefix: "is" !default;
-$separatePrefixes: true !default;
+
+$fullElementNames: false !default;
+$fullModifierNames: false !default;

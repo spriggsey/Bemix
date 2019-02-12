@@ -15,7 +15,13 @@
 
 @function getBlock($selector) {
     $selector: selectorToString($selector);
-    $modifierStart: str-index($selector, ".#{$modifierSeparator}") - 1;
+    @if $fullModifierNames {
+        $modifierStart: (str-index($selector, "#{$modifierSeparator}") - 1);
+        @return str-slice($selector, 0, $modifierStart);
+    } @else {
+        $modifierStart: (str-index($selector, ".#{$modifierSeparator}") - 1);
+        @return str-slice($selector, 0, $modifierStart);
+    }
     @return str-slice($selector, 0, $modifierStart);
 }
 
