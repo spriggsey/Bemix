@@ -17,15 +17,25 @@
 // Element ( .__link )
 @mixin e($element) {
     $selector: &;
-    @if containsModifier($selector) and ($separatePrefixes == false) {
-        $block: getBlock($selector);
-        @at-root {
-            #{$selector} {
-                #{$block+$elementSeparator+$element} {
+
+    @if $fullElementNames == true {
+        @if containsModifier($selector) {
+            $block: getBlock($selector);
+            @at-root {
+                #{$selector} {
+                    #{$block+$elementSeparator+$element} {
+                        @content;
+                    }
+                }
+            }
+        } @else {
+            @at-root {
+                #{$selector}#{$elementSeparator}#{$element} {
                     @content;
                 }
             }
         }
+
     } @else {
         @at-root {
             #{$selector} .#{$elementSeparator}#{$element} {
@@ -38,18 +48,19 @@
 // Modifier ( .--dark )
 @mixin m($modifier) {
     $selector: &;
-    @if ($separatePrefixes) {
-        @at-root {
-            #{$selector}.#{$modifierSeparator}#{$modifier} {
-                @content;
-            }
-        }
-    } @else {
+    @if ($fullModifierNames) {
         @at-root {
             #{$selector}#{$modifierSeparator}#{$modifier} {
                 @content;
             }
         }
+    } @else {
+        @at-root {
+            #{$selector}.#{$modifierSeparator}#{$modifier} {
+                @content;
+            }
+        }
+        
     }
 
 }
