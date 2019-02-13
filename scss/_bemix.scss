@@ -17,7 +17,6 @@
 // Element ( .__link )
 @mixin e($element) {
     $selector: &;
-
     @if $fullElementNames == true {
         @if containsModifier($selector) {
             $block: getBlock($selector);
@@ -29,13 +28,19 @@
                 }
             }
         } @else {
-            @at-root {
-                #{$selector}#{$elementSeparator}#{$element} {
+            $block: getBlock($selector);
+            @if containsElement($selector) {
+                #{$block}#{$elementSeparator}#{$element} {
                     @content;
+                }
+            } @else {
+                @at-root {
+                    #{$block}#{$elementSeparator}#{$element} {
+                        @content;
+                    }
                 }
             }
         }
-
     } @else {
         @at-root {
             #{$selector} .#{$elementSeparator}#{$element} {
@@ -60,7 +65,7 @@
                 @content;
             }
         }
-        
+
     }
 
 }
