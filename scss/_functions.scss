@@ -13,15 +13,42 @@
     }
 }
 
-@function getBlock($selector) {
+@function containsElement($selector) {
     $selector: selectorToString($selector);
-    @if $fullModifierNames {
-        $modifierStart: (str-index($selector, "#{$modifierSeparator}") - 1);
-        @return str-slice($selector, 0, $modifierStart);
+    @if str-index($selector, $elementSeparator) {
+        @return true;
     } @else {
-        $modifierStart: (str-index($selector, ".#{$modifierSeparator}") - 1);
-        @return str-slice($selector, 0, $modifierStart);
+        @return false;
     }
-    @return str-slice($selector, 0, $modifierStart);
 }
 
+@function getBlock($selector) {
+    $rawSelector: $selector;
+    $selector: selectorToString($selector);
+
+    // trim the stupid comma...
+    $commaStart: (str_index($selector,",") - 1);
+    $selector: str_slice($selector, 0 ,$commaStart);
+
+    @if (containsModifier($rawSelector)) {
+        @if $fullModifierNames {
+            $modifierStart: (str-index($selector, "#{$modifierSeparator}") - 1);
+            $selector: str-slice($selector, 0, $modifierStart);
+        } @else {
+            $modifierStart: (str-index($selector, ".#{$modifierSeparator}") - 1);
+            $selector: str-slice($selector, 0, $modifierStart);
+        }
+    }
+
+    @if (containsElement($selector)) {
+        @if $fullElementNames {
+            $elementStart: (str-index($selector, "#{$elementSeparator}") - 1);
+            $selector: str_slice($selector, 0, $elementStart);
+        } @else {
+            $elementStart: (str-index($selector, ".#{$elementSeparator}") );
+            $selector: str_slice($selector, 0, $elementStart);
+        }
+    }
+
+    @return $selector;
+}
