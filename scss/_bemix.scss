@@ -18,7 +18,7 @@
 @mixin e($element) {
     $selector: &;
     @if $fullElementNames == true {
-        @if containsModifier($selector) {
+        @if containsModifier(selectorToString($selector)) {
             $block: getBlock($selector);
             @at-root {
                 #{$selector} {

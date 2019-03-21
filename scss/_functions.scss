@@ -5,7 +5,6 @@
 }
 
 @function containsModifier($selector) {
-    $selector: selectorToString($selector);
     @if str-index($selector, $modifierSeparator) {
         @return true;
     } @else {
@@ -22,15 +21,42 @@
     }
 }
 
+@function str-split($string, $separator) {
+    // empty array/list
+    $split-arr: ();
+    // first index of separator in string
+    $index: str-index($string, $separator);
+    // loop through string
+    @while $index != null {
+        // get the substring from the first character to the separator
+        $item: str-slice($string, 1, $index - 1);
+        // push item to array
+        $split-arr: append($split-arr, $item);
+        // remove item and separator from string
+        $string: str-slice($string, $index + 1);
+        // find new index of separator
+        $index: str-index($string, $separator);
+    }
+    // add the remaining string to list (the last item)
+    $split-arr: append($split-arr, $string);
+
+    @return $split-arr;
+}
+
 @function getBlock($selector) {
-    $rawSelector: $selector;
     $selector: selectorToString($selector);
 
     // trim the stupid comma...
     $commaStart: (str_index($selector,",") - 1);
-    $selector: str_slice($selector, 0 ,$commaStart);
+    $selector: str_slice($selector, 0, $commaStart);
 
-    @if (containsModifier($rawSelector)) {
+    // sometimes we need to split out the block from other blocks
+    $list: str-split($selector, ' ');
+    @if (length($list) > 1) {
+        $selector: nth($list, length($list));
+    }
+
+    @if (containsModifier($selector)) {
         @if $fullModifierNames {
             $modifierStart: (str-index($selector, "#{$modifierSeparator}") - 1);
             $selector: str-slice($selector, 0, $modifierStart);
@@ -45,7 +71,7 @@
             $elementStart: (str-index($selector, "#{$elementSeparator}") - 1);
             $selector: str_slice($selector, 0, $elementStart);
         } @else {
-            $elementStart: (str-index($selector, ".#{$elementSeparator}") );
+            $elementStart: (str-index($selector, ".#{$elementSeparator}"));
             $selector: str_slice($selector, 0, $elementStart);
         }
     }
