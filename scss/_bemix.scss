@@ -3,9 +3,9 @@
 // Jack Spriggs 2018
 // GNU GENERAL PUBLIC LICENSE
 // VARIABLES
-@import "variables";
+@use "variables";
 // FUNCTIONS
-@import "functions";
+@use "functions";
 
 // Block ()
 @mixin b($block) {
